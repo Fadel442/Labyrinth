@@ -5,6 +5,7 @@ using UnityEngine;
 public class GravityController : MonoBehaviour
 {
     [SerializeField] float acceleration = 9.8f;
+    Vector3 gravityOffset = Vector3.zero;
     void Start()
     {
         if(SystemInfo.supportsGyroscope){
@@ -13,6 +14,21 @@ public class GravityController : MonoBehaviour
     }
 
     void Update()
+    {
+        Physics.gravity = GetGravityFromSensor() - gravityOffset;
+        Debug.Log(Physics.gravity);
+
+        CallibrateGravity();
+    }
+
+    public void CallibrateGravity()
+    {  
+        gravityOffset = Vector3.down * acceleration - GetGravityFromSensor();
+        Debug.Log("sensor" + GetGravityFromSensor());
+        Debug.Log("offset" + gravityOffset);
+    }
+
+    public Vector3 GetGravityFromSensor()
     {
         Vector3 gravity;
         if (Input.gyro.gravity != Vector3.zero)
@@ -23,8 +39,7 @@ public class GravityController : MonoBehaviour
         {
             gravity = Input.acceleration * acceleration;
         }
-
         gravity.z = Mathf.Clamp(gravity.z, float.MinValue, -1);
-        Physics.gravity = new Vector3(gravity.x, gravity.z, gravity.y);
+        return new Vector3(gravity.x, gravity.z, gravity.y);
     }
 }
