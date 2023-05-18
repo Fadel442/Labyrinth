@@ -9,4 +9,10 @@ public class SceneLoad : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName);
     }
+
+    public void ReloadCurrScene()
+    {
+        var currScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currScene.name);
+    }
 }
