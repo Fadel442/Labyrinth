@@ -6,6 +6,8 @@ public class GravityController : MonoBehaviour
 {
     [SerializeField] float acceleration = 9.8f;
     Vector3 gravityOffset = Vector3.zero;
+
+    bool isActive = true;
     void Start()
     {
         if(SystemInfo.supportsGyroscope){
@@ -15,17 +17,22 @@ public class GravityController : MonoBehaviour
 
     void Update()
     {
-        Physics.gravity = GetGravityFromSensor() - gravityOffset;
-        Debug.Log(Physics.gravity);
-
-        CallibrateGravity();
+        if (isActive)
+        {
+            Physics.gravity = GetGravityFromSensor() - gravityOffset;
+        }
+        else
+        {
+            Physics.gravity = Vector3.zero;
+        }
+       
     }
 
     public void CallibrateGravity()
     {  
         gravityOffset = Vector3.down * acceleration - GetGravityFromSensor();
-        Debug.Log("sensor" + GetGravityFromSensor());
-        Debug.Log("offset" + gravityOffset);
+        // Debug.Log("sensor" + GetGravityFromSensor());
+        // Debug.Log("offset" + gravityOffset);
     }
 
     public Vector3 GetGravityFromSensor()
@@ -41,5 +48,18 @@ public class GravityController : MonoBehaviour
         }
         gravity.z = Mathf.Clamp(gravity.z, float.MinValue, -1);
         return new Vector3(gravity.x, gravity.z, gravity.y);
+    }
+
+    public void SetActive(bool value)
+    {
+        isActive = value;
+        if (value)
+        {
+            Time.timeScale = 1;
+        }
+        else
+        {
+            Time.timeScale = 0;
+        }
     }
 }
