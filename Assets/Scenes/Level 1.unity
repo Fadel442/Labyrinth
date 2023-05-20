@@ -2960,6 +2960,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  test: 0
 --- !u!114 &1458390681
 MonoBehaviour:
   m_ObjectHideFlags: 0
