@@ -130,6 +130,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   customEvent: {fileID: 11400000, guid: 1a53c201c91a47b4fb30754166ad3c65, type: 2}
+  setTime:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!65 &2822329351753469821
 BoxCollider:
   m_ObjectHideFlags: 0
